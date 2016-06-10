@@ -9,7 +9,7 @@
   docker:
     name: keepalived
     image: "{{ keepalived_image }}"
-    state: started
+    state: reloaded
     detach: true
     restart_policy: always
     net: host
