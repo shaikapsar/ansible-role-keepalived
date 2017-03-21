@@ -6,14 +6,14 @@
 
 
 - name: run keepalived container
-  docker:
+  docker_container:
     name: keepalived
     image: "{{ keepalived_image }}"
-    state: reloaded
-    detach: true
+    state: started
+    detach: True
     restart_policy: always
-    net: host
-    privileged: true
+    network_mode: host
+    privileged: True
     env:
       KEEPALIVED_PRIORITY: "{{ keepalived_priority }}"
       KEEPALIVED_VIRTUAL_IP: "{{ keepalived_virtual_ip }}"
