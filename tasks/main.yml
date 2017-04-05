@@ -1,9 +1,18 @@
+---
+- name: Include distribution-specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "vars/{{ ansible_distribution|lower }}.yml"
+    - "vars/{{ ansible_os_family|lower }}.yml"
+
 - name: load ip_vs module
   modprobe: name=ip_vs state=present
 
 - name: make modprobe persistent
-  lineinfile: dest=/etc/modules line="ip_vs" state=present
+  lineinfile: dest={{kernel_module_file}} create=yes line="ip_vs" state=present
 
+- name:  allow kernel binding non-local IP
+  sysctl:  name=net.ipv4.ip_nonlocal_bind reload=yes sysctl_set=yes value=1 state=present 
 
 - name: run keepalived container
   docker_container:
@@ -14,6 +23,7 @@
     restart_policy: always
     network_mode: host
     privileged: True
+    capabilities: [ NET_ADMIN, NET_BROADCAST ]
     env:
       KEEPALIVED_PRIORITY: "{{ keepalived_priority }}"
       KEEPALIVED_VIRTUAL_IP: "{{ keepalived_virtual_ip }}"
