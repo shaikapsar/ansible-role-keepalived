@@ -1,0 +1,2 @@
+---
+kernel_module_file: /etc/modules-load.d/ip_vs.conf
