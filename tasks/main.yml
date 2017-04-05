@@ -25,6 +25,7 @@
     privileged: True
     capabilities: [ NET_ADMIN, NET_BROADCAST ]
     env:
+      KEEPALIVED_INTERFACE: "{{ ansible_default_ipv4.interface }}"
       KEEPALIVED_PRIORITY: "{{ keepalived_priority }}"
       KEEPALIVED_VIRTUAL_IP: "{{ keepalived_virtual_ip }}"
   tags: keepalived
