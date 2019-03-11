@@ -18,4 +18,5 @@ keepalived_role: "{% if ansible_default_ipv4.address == first_load_balancer_ip %
 keepalived_version: 'latest'
 keepalived_image: "indigodatacloud/keepalived:{{keepalived_version}}"
 keepalived_priority: "{%- if keepalived_role == 'master' -%}101{%- else -%}100{%- endif -%}"
+keepalived_interface: "{{ ansible_default_ipv4.interface }}"
 
