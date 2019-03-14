@@ -28,6 +28,5 @@
       KEEPALIVED_INTERFACE: "{{ keepalived_interface }}"
       KEEPALIVED_PRIORITY: "{{ keepalived_priority }}"
       KEEPALIVED_VIRTUAL_IP: "{{ keepalived_virtual_ip }}"
-      KEEPALIVED_STATE: "{{ keepalived_role }}"
   tags: keepalived
 
