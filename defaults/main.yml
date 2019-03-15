@@ -23,7 +23,7 @@ keepalived_priority: "{%- if keepalived_role == 'master' -%}101{%- else -%}100{%
 
 keepalived_unicast_peers: "
         {%- if load_balancers_list is defined -%}
-             {{ load_balancers_list | select('match', '^current_ip+') | list }}
+             {{ load_balancers_list | |  difference(current_ip) | list }}
              {{[0]}}
         {%- else -%}
               {{hostvars[groups[load_balancers_group][0]]['ansible_'+ keepalived_interface ]['ipv4']['address']}}
