@@ -25,7 +25,7 @@ keepalived_unicast_peers: "
         {%- if load_balancers_list is defined -%}
               #PYTHON2BASH:['{{load_balancers_list | difference(current_ip)| list |join(\"', '\") }}']
         {%- else -%}
-              #PYTHON2BASH:['{{groups[load_balancers_group] | map('extract', hostvars, ['ansible_'+ keepalived_interface, 'ipv4', 'address']) | difference(current_ip) | list |join(\"', '\") }}'
+              #PYTHON2BASH:['{{groups[load_balancers_group] | map('extract', hostvars, ['ansible_'+ keepalived_interface, 'ipv4', 'address']) | list | difference(current_ip) | list |join(\"', '\") }}'
         {%- endif -%}
 "
 
