@@ -15,7 +15,7 @@
   sysctl:  name=net.ipv4.ip_nonlocal_bind reload=yes sysctl_set=yes value=1 state=present 
   
 - debug:
-    msg: {{keepalived_unicast_peers}}
+    msg: "{{keepalived_unicast_peers}}"
   tags: keepalived-unicast-peers
 
 - name: run keepalived container
