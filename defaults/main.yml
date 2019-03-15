@@ -21,7 +21,7 @@ keepalived_image: "osixia/keepalived:{{keepalived_version}}"
 keepalived_priority: "{%- if keepalived_role == 'master' -%}101{%- else -%}100{%- endif -%}"
 keepalived_unicast_peers: "
         {%- if load_balancers_list is defined -%}
-             {{ load_balancers_list | select('unmatch', '^hostvars[inventory_hostname]['ansible_'+ keepalived_interface ]['ipv4']['address']+') | list }}
+             {{ load_balancers_list | select('unmatch', "^hostvars[inventory_hostname]['ansible_'+ keepalived_interface ]['ipv4']['address']+") | list }}
              {{[0]}}
         {%- else -%}
               {{hostvars[groups[load_balancers_group][0]]['ansible_'+ keepalived_interface ]['ipv4']['address']}}
